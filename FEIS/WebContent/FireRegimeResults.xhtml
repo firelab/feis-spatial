@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title> Search Results for Fire Regimes</title>
+</head>
+<body>
+    <ui:composition template="/templates/masterLayout.xhtml">
+        <ui:define name="viewTitle">
+             <h:panelGroup ><h2>#{msgs.fireRegimeResultsTitle}</h2></h:panelGroup>
+        </ui:define>
+        
+        <ui:define name="content">
+           <h:form id="frmFireRegimeResults" style="min-width:47em;" prependId="false">    
+ 
+                <br /><br />
+                <h:panelGrid style="padding-left:20px; width:80%;" >   
+                	<h:panelGroup style="color: black; font-size:small; padding-left:20px;"><b>Results for:&nbsp;&nbsp;#{searchBean.reportDescription}</b><BR/></h:panelGroup>	
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;"><b>Number of Fire Regimes returned:</b>&nbsp;&nbsp;#{searchBean.fireRegimeResultCount}</h:panelGroup>
+            		 <h:panelGroup>
+                		<h:commandButton style="margin-left:20px" action="#{searchBean.exportFireRegimeTable()}" value="Export Table" title="export this report to csv"/>
+                		<h:commandButton  action="#{searchBean.gotoFireRegimeSearchAction}" value="New Search"/>
+            			<h:commandButton  action="#{searchBean.gotoReviseFireRegimeSearch}" value="Revise"/> 
+               		 </h:panelGroup>
+               		 <h:panelGrid style="padding-left:0px; width:80%;"> 
+            			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not searchBean.adminJunk}"><b></b>&nbsp;&nbsp;#{searchBean.adminJunk}<br/></h:panelGroup> 
+            			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not searchBean.plantJunk}"> <b></b>&nbsp;&nbsp;#{searchBean.plantJunk}<br/></h:panelGroup>    
+            			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not searchBean.mapJunk}"> <b></b>&nbsp;&nbsp;#{searchBean.mapJunk}<br/></h:panelGroup>      
+            			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not empty searchBean.locationJunk}"> <b></b>&nbsp;&nbsp;#{searchBean.locationJunk}<h:outputLink value="http://plants.usda.gov/java/">PLANTS Database.</h:outputLink>
+            			</h:panelGroup> 					
+            		</h:panelGrid> 
+            	</h:panelGrid>	
+                <h:panelGroup style="padding-left:20px;" rendered="#{not empty searchBean.fireRegimeList}">
+	                <h:dataTable cellpadding="10" value="#{searchBean.fireRegimeList}" var="fr"  >  
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Region</f:facet>
+		                <span title="fire regime #{fr.frId}">#{fr.bpsRegion}</span>
+		                </h:column>     
+		                
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Fire Regime Title</f:facet>
+			                <h:outputLink value="#{fr.htmlPath}" rendered="#{not empty fr.htmlPath}">#{fr.title}</h:outputLink>
+			                <h:outputText rendered="#{empty fr.htmlPath}" value="#{fr.title}"></h:outputText>
+		                </h:column>
+		                
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Date</f:facet>
+			                <h:outputText value="#{fr.yearWritten}"></h:outputText>
+		                </h:column>
+		                                         
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Min MFRI (yr)</f:facet>
+		                	#{fr.feisMinInterval != null ? fr.feisMinInterval : 'none' } 
+		                </h:column>
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Max MFRI (yr)</f:facet>
+		                	#{fr.feisMaxInterval != null ? fr.feisMaxInterval : 'none' }
+		                </h:column>
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Biophysical Settings &amp; Data</f:facet>
+		                	<h:outputLink rendered="#{ not empty fr.htmlPathAppendixA }" title="link to AppendixA.xlsx for this Fire Regime" value="#{fr.htmlPathAppendixA}">Available</h:outputLink>
+		                </h:column>
+		                
+		                <h:column headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Fire Studies</f:facet> 
+		                    <h:commandLink rendered="#{fr.fireStudyCount gt 0}" action="#{searchBean.searchFireStudiesByFireRegime(fr.frId)}" title="view fire study(s) found for this species">
+		                    	Available 
+		                    </h:commandLink>
+		                    <h:outputText rendered="#{fr.fireStudyCount == 0}" value="Not Available"></h:outputText>
+		                </h:column> 
+		 
+		                <h:column headerClass="columnHeader" footerClass="columnFooter" ><f:facet name="header">Species Reviews</f:facet>
+		                	<h:commandLink action="#{searchBean.searchReviewsByFireRegime(fr.frId)}" rendered="#{fr.reviewCount gt 0}" title="view review(s) found for this species">
+		                		Available
+		                	</h:commandLink>
+		                	<h:outputText rendered="#{fr.reviewCount == 0}" value="Not Available"></h:outputText>
+		                </h:column> 
+	                </h:dataTable>
+                </h:panelGroup>
+
+            </h:form>
+         </ui:define>
+    </ui:composition>
+
+</body>
+</html>

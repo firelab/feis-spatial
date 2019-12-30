@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Search By Name</title>
+</head>
+<body>
+	<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="viewTitle">
+			 <h2>#{msgs.byNamePageTitle}</h2>
+		</ui:define>
+		<ui:define name="content">
+           <h:form style="min-width:750px;">             	
+            	<br /><br />
+            	<p style="color: black; font-size:medium; font-weight: bold;">Search for a species by name (scientific or common):</p>
+            	<h:panelGrid style="padding-left:20px;" columns="1">
+            		<h:panelGroup style="color: black; font-size:small;" >
+            			Species Name (scientific or common)
+            			<h:inputText id="name" size="60" value="#{searchBean.inputName}" required="true" />            			
+            			<h:commandButton  value="Search" action="#{searchBean.searchByName}" style="font-weight:bold; font-size:small;" /> 
+            			<br><h:message for="name" errorClass="errors" style="color: red;" /></br>           			
+            		</h:panelGroup>         		
+            		
+            	</h:panelGrid>
+            	
+            	
+            	<ui:remove>-------------Report part----------------</ui:remove>            	
+            	<h:panelGrid rendered="#{searchBean.displayReport}" columns="1" >
+            		<h:panelGroup><hr style="color: black; margin-left: 10px; height: 1px; vertical-align: top; "/></h:panelGroup>
+            		<h:panelGroup style="padding-left:5px;color: black; font-size:medium; font-weight: bold;">Results:</h:panelGroup>	
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;">
+            			<h:outputLabel value="#{msgs.reportMSG}" rendered="#{not searchBean.hasResult}" />
+            		</h:panelGroup>
+            	</h:panelGrid>
+            	
+            	<h:panelGrid style="padding-left:20px; width:50%;" rendered="#{searchBean.hasResult}">
+            		<h:panelGroup style="color: black; font-size:medium; "><b>Report Summary</b></h:panelGroup><br></br>
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;"><b>Number of Species Reviews returned:</b>&nbsp;&nbsp;#{searchBean.numSPPReturned}</h:panelGroup>
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;"><b>Number of Fire Studies returned:</b>&nbsp;&nbsp;#{searchBean.numFSReturned}</h:panelGroup>
+            	</h:panelGrid>
+            	
+            	<ui:remove>---- result table data below</ui:remove>
+            	<br /><br />
+            	<h:panelGroup style="color: black; font-size:medium; padding-left:20px; " rendered="#{searchBean.hasResult}"><b>Species Review Report</b></h:panelGroup>
+            	<br></br>
+            	<table  class="reportTable">
+            		
+            		<ui:repeat value="#{searchBean.speciesList}" var="SPP">
+	            		<h:panelGroup style="padding-left:20px; " rendered="#{searchBean.hasResult}">
+		            		<tr>
+		            			<td class="report"><b>Scientific Name:</b> #{SPP.scientificName}</td>
+		            		</tr>	
+		            		<tr>
+		            			<td class="report"><b>Common Name:</b> #{SPP.commonName}</td>
+		            		</tr>	
+		            		<tr>
+		            			<td class="report"><b>Review Date:</b> #{SPP.reviewDate}</td>
+		            		</tr>	
+		            		<tr>
+		            			<td class="report"><b>Link to Species Review:</b> #{SPP.linkToSpeciesReview}<br /><br />
+		            				
+		            			</td>
+		            		</tr>	
+		            		<tr>
+		            			<td style="padding-left:40px; font-size: medium;" >
+		            				<b>Fire Study Report</b><br /><br />
+		            				<table>
+			            			<ui:repeat value="#{SPP.fireStudyList}" var="FS">
+			            					<tr>
+			            						<td class="report"><b>Title:</b> #{FS.title}</td>
+			            					</tr>
+			            					<tr>
+			            						<td class="report"><b>Study Date:</b> #{FS.studyDate}</td>
+			            					</tr>
+			            					<tr>
+			            						<td class="report"><b>Link to Fire Study:</b> #{FS.linkToFireStudy}<br /><br /></td>
+			            					</tr>
+			            					
+			            			</ui:repeat>
+		            				</table> 	   								
+		            					<br></br>
+		            			</td>           				
+		            		</tr>
+	            		</h:panelGroup>	
+            		</ui:repeat>
+            			
+            	</table>            	
+            	
+            </h:form>
+         </ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSFFlowViewLayout version="1.0">
+  <Drawing gridVisible="true" snapOn="true" />
+  <JSFFlowResource path="/index.xhtml" location="87,0" dimension="110,36" />
+  <JSFFlowResource path="/SearchByOther.xhtml" location="59,126" dimension="160,36" />
+  <JSFFlowResource path="/FireStudySearch.xhtml" location="67,459" dimension="166,36" />
+  <JSFFlowResource path="/ReviewResults.xhtml" location="61,237" dimension="156,36" />
+  <JSFFlowResource path="/FireStudyResults.xhtml" location="94,348" dimension="168,36" />
+  <JSFFlowNavigationCase id="/index.xhtml,/SearchByOther.xhtml,searchByOther,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="142,36" />
+      <AbsolutePoint location="142,66" />
+      <AbsolutePoint location="139,66" />
+      <AbsolutePoint location="139,126" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/index.xhtml,/FireStudySearch.xhtml,searchByFireStudy,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="98,36" />
+      <AbsolutePoint location="98,66" />
+      <AbsolutePoint location="0,66" />
+      <AbsolutePoint location="0,421" />
+      <AbsolutePoint location="88,421" />
+      <AbsolutePoint location="88,459" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/index.xhtml,/ReviewResults.xhtml,reviewResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="120,36" />
+      <AbsolutePoint location="120,96" />
+      <AbsolutePoint location="29,96" />
+      <AbsolutePoint location="29,199" />
+      <AbsolutePoint location="81,199" />
+      <AbsolutePoint location="81,237" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/index.xhtml,/FireStudyResults.xhtml,fireStudyResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="186,36" />
+      <AbsolutePoint location="186,66" />
+      <AbsolutePoint location="282,66" />
+      <AbsolutePoint location="282,310" />
+      <AbsolutePoint location="234,310" />
+      <AbsolutePoint location="234,348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/SearchByOther.xhtml,/ReviewResults.xhtml,reviewResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="99,162" />
+      <AbsolutePoint location="99,199" />
+      <AbsolutePoint location="120,199" />
+      <AbsolutePoint location="120,237" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/FireStudySearch.xhtml,/FireStudyResults.xhtml,fireStudyResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="213,459" />
+      <AbsolutePoint location="213,421" />
+      <AbsolutePoint location="234,421" />
+      <AbsolutePoint location="234,384" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/ReviewResults.xhtml,/SearchByOther.xhtml,searchByOther,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="159,237" />
+      <AbsolutePoint location="159,199" />
+      <AbsolutePoint location="179,199" />
+      <AbsolutePoint location="179,162" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/ReviewResults.xhtml,/index.xhtml,searchByName,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="198,237" />
+      <AbsolutePoint location="198,199" />
+      <AbsolutePoint location="250,199" />
+      <AbsolutePoint location="250,96" />
+      <AbsolutePoint location="164,96" />
+      <AbsolutePoint location="164,36" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/ReviewResults.xhtml,/FireStudyResults.xhtml,fireStudyResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="100,273" />
+      <AbsolutePoint location="100,310" />
+      <AbsolutePoint location="122,310" />
+      <AbsolutePoint location="122,348" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/FireStudyResults.xhtml,/ReviewResults.xhtml,reviewResults,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="178,348" />
+      <AbsolutePoint location="178,273" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/FireStudyResults.xhtml,/FireStudySearch.xhtml,searchByFireStudy,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="122,384" />
+      <AbsolutePoint location="122,421" />
+      <AbsolutePoint location="130,421" />
+      <AbsolutePoint location="130,459" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+  <JSFFlowNavigationCase id="/FireStudyResults.xhtml,/FireStudySearch.xhtml,navTo,&lt;empty&gt;" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="178,384" />
+      <AbsolutePoint location="178,421" />
+      <AbsolutePoint location="171,421" />
+      <AbsolutePoint location="171,459" />
+    </AutomaticBendpoints>
+  </JSFFlowNavigationCase>
+</JSFFlowViewLayout>
+

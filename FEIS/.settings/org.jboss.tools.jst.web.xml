@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-systems VERSION="2.0.0" application-name="FEIS"
+ model-entity="FileSystems" workspace-home="./WebContent/WEB-INF">
+ <file-system NAME="WEB-INF" location="%workspace.home%" model-entity="FileSystemFolder"/>
+ <file-system NAME="WEB-ROOT" info="Content-Type=Web"
+  location="%workspace.home%/.." model-entity="FileSystemFolder"/>
+ <file-system NAME="src" location="%workspace.home%/../../src" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib" location="%workspace.home%/lib" model-entity="FileSystemFolder"/>
+ <file-system NAME="classes" location="%workspace.home%/classes" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-jsf-api-2.2.11.jar"
+  location="C:\work\mye10\newworkspace\FEIS\WebContent\WEB-INF\lib\jsf-api-2.2.11.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jsf-impl-2.2.11.jar"
+  location="C:\work\mye10\newworkspace\FEIS\WebContent\WEB-INF\lib\jsf-impl-2.2.11.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-activation.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\activation.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-javax.servlet.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\javax.servlet.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jboss-j2ee.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\jboss-j2ee.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jboss-jaas.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\jboss-jaas.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jts.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\jts.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-mail.jar"
+  location="C:\progs\MyEclipse\Common\plugins\com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805\data\libraryset\1.3\mail.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-resources.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\resources.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dnsns.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\ext\dnsns.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-localedata.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\ext\localedata.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunjce_provider.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\ext\sunjce_provider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunmscapi.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\ext\sunmscapi.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunpkcs11.jar"
+  location="C:\progs\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\lib\ext\sunpkcs11.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="FEIS" location="%eclipse.project%" model-entity="FileSystemFolder"/>
+ <file-system NAME="src-1" location="%workspace.home%/../../test" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-poi-3.12.jar"
+  location="C:\work\mye10\newworkspace\FEIS\WebContent\WEB-INF\lib\poi-3.12.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-junit.jar"
+  location="C:\progs\MyEclipse\Common\plugins\org.junit_4.8.2.v4_8_2_v20110321-1705\junit.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-org.hamcrest.core_1.1.0.v20090501071000.jar"
+  location="C:\progs\MyEclipse\Common\plugins\org.hamcrest.core_1.1.0.v20090501071000.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-postgresql-9.2-1002.jdbc4.jar"
+  location="C:\progs\postgresql-9.2-1002.jdbc4.jar" model-entity="FileSystemJar"/>
+ <web SERVLET_VERSION="2.4" model-entity="JstWeb" model-path="/web.xml">
+  <module URI="/WEB-INF/faces-config.xml" model-entity="WebJSFModule"
+   model-path="/faces-config.xml" src="src" web-root="WEB-ROOT"/>
+ </web>
+</file-systems>

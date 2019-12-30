@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" lang="en">
+   <h:head>
+	   	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+	   	<meta http-equiv="Content-Style-Type" content="text/css"/>
+	   	
+	   	<title>Home page, Fire Effects Information System</title>	
+	   	<h:outputStylesheet library="css" name="nn4.css"/>
+	   	<h:outputStylesheet library="css" name="FEIS.css"/>
+	   	<h:outputScript library="js" name="jquery-1.11.3.min.js"/>
+	   	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  	</h:head>
+   <h:body>
+   	
+<table cellspacing="0" cellpadding="0" border="0" width="100%" id="upper">
+   	<tr> 
+		<td id="upper-td">
+	    	 <h:outputText value="#{fileUtilBean.ReadFileAsString('Upper.html')}" escape="false"></h:outputText>
+		</td>
+	</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%" id="banner">
+   	<tr> 
+		<td id="banner-td">
+	    	 <h:outputText value="#{fileUtilBean.ReadFileAsString('Banner.html')}" escape="false"></h:outputText>
+		</td>
+	</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%" id="menus">
+   	<tr> 
+		<td id="menu-td">
+	    	 <h:outputText value="#{fileUtilBean.ReadFileAsString('Menus.html')}" escape="false"></h:outputText>
+		</td>
+	</tr>
+</table>
+   	
+      
+         <!-- THIS IS THE MAIN TABLE WRAPPER -->         
+		<table cellspacing="0" cellpadding="0" border="0" width="100%" summary="Layout table: Main table.  The first row contains a USDAFS link and a service wide drop-down navigation.  The second row and third rows contains the Station name and search engine.  Below this are two cells.  The left cell contains the site navigation.  The right cell contains the content of the page.">
+		 
+			
+			<!-- ROW 3.0 - SEARCH AND ARCH TABLE START  -->
+			<!-- TAB INDEX: 5-6 -->
+			<!-- ROW CONTAINS:
+			 	SEARCH ENGINE
+			 	1/4 ARCH IMAGE -->
+			<tr> 
+			    <td width="14%" id="search-table-left-cell"> 
+			 <!--  <h:graphicImage library="images"  name="search-head.gif" height="14" width="189" alt="" />			   
+			      <form action="http://www.fs.fed.us/cgi-bin/texis/searchallsites/search.allsites/" method="post" id="search_form" title="[Form]: USDA Forest Service Search Engine.">
+			
+					<div> 
+						<input type="hidden" name="db" value="allsites" />
+						<label for="search_field">&nbsp;</label>
+						<input type="text" tabindex="5" size="12" value="(enter query)" name="query" id="search_field" title="Enter a keyword or phrase you wish to search for.  Click the 'Search' button to conduct the search." onclick="value=''" />&nbsp; 
+						<input type="submit" class="button" value="Search" tabindex="6" />
+					</div>
+				</form>-->	
+				</td>
+			    <td width="100%" id="search-table-right-cell" colspan="2"> 
+			    <!-- <h:graphicImage library="images"  name="arch-basic.gif" height="31" width="322" alt=""/>	 -->		     
+			    </td>
+			</tr>
+			
+			<!-- ROW 4.0B - MAIN CONTENT AND NAVIGATION START - (RELATED LINKS OPTION)
+				TAB INDEX: 7-20 (only main navigation areas) 
+				INCLUDES:
+					MAIN NAVIGATION CELL WITH THREE NESTED TABLES
+						1. PRIMARY NAVIGATION TABLE
+						2. SECONDARY NAVIGATION TABLE
+						3. STATION NAME AND ADDRESS INFORMATION PLUS USDA AND FS LOGOS
+					MAIN CONTENT CELL WITH NESTED TABLE FOR CONTENT AND RELATED LINKS TABLE -->
+			<tr> 
+		<!-- MAIN NAVIGATION CELL WITH TWO NESTED TABLES START -->
+			    <td width="189" valign="top" id="main-table-left-cell"> 
+			    
+			     <h:outputText value="#{fileUtilBean.ReadFileAsString('leftNav.html')}" escape="false"></h:outputText>
+		      
+		    	</td>
+    			<!-- MAIN CONTENT WRAPPER CELL START - 
+				THIS CELL CONTAINS A NESTED TABLE WITH TWO CELLS.  
+				ONE CELL CONTAINS THE MAIN CONTENT AND 
+				THE OTHER CONTAINS THE RELATED LINS -->
+				<td valign="top" colspan="2" id="main-table-right-cell"> 
+					<table cellspacing="0" cellpadding="0" border="0" width="100%" summary="This table is used to format the main content on this page and the related links nested table.">
+
+				        <!--DWLayoutTable-->
+				        <tr> 
+				          <!-- MAIN CONTENT CELL START -->
+				          <td width="80%" valign="top" id="content-wrapper"> 
+					            <!-- MAIN PAGE INFO STARTS HERE -->
+					            <ui:insert name="viewTitle"/>
+					            <hr style="margin-top: -15px; color: black; margin-left: 10px; height: 1px; vertical-align: top;"/>				            
+					            			
+								<ui:insert name="content" />						
+				     
+            				</td>
+            			</tr>
+            		</table>
+            			
+				
+				</td>
+    		</tr>
+    		<!-- ROW 5.0 - FOOTER LAYOUT TABLE START 
+			TAB INDEX: NONE
+			INCLUDES:
+				 LINK TO TOP OF PAGE
+				 DISCLAIMER,  PRIVACY, AND PRINT LINKS
+				 ROUND IMAGE LOWER RIGHT CORNER  -->
+			<tr> 				
+			    <td  id="footer-table-left-cell">&nbsp; </td>
+			    <td id="footer-table-right-cell" colspan="2"><!-- #BeginLibraryItem "/Library/footer-disclaimers.lbi" -->&nbsp;
+			    	<!--  <a href="javascript:if (window.print != null) {window.print();}" title="Will print a print friendly version in newer browsers">Print 
+					This Page</a> --><!-- #EndLibraryItem -->
+				</td>
+			</tr>
+			
+			<!-- ROW 6.0 - LAST MODIFIED INFORMATION - START  -->
+				<!--  TAB INDEX: NONE  -->
+				<!--  INCLUDES:  This Is An Optional Row - Last Modified For Sites Residing On The WO National Public Web Server -->
+			<h:outputText value="#{fileUtilBean.ReadFileAsString('footer.html')}" escape="false"></h:outputText>
+		</table>
+     
+   </h:body>
+</html>

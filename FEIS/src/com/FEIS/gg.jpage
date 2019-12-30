@@ -1,0 +1,11 @@
+ String FIELDS =
+	        "bah";
+	        
+	String[] split = FIELDS.split(", ");
+	StringBuilder sb = new StringBuilder();
+	for(String s : split) { 
+		sb.append("\"").append(s).append("\", ");
+	}
+	sb.deleteCharAt(sb.length()-1);
+	sb.deleteCharAt(sb.length()-1);
+	sb.toString();  

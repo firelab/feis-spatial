@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" lang="en">
+<head>
+	 
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>BPS Mapping</title>
+</head>
+<body>
+	
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="viewTitle">
+			 <h2>BPS MAP</h2>
+		</ui:define>
+		<ui:define name="content">
+			 
+			<h:outputScript target="body">
+				//<![CDATA[
+				var map;
+				var polygons = [];
+				function clearPolygons() {
+					for(var a = 0; a < polygons.length; a++) {
+						polygons[a].setMap(null);
+					}
+					polygons = [];
+				}
+				
+				function initializeMap() 
+				{ 
+					  var myLatlng = new google.maps.LatLng(37.09024,-95.712891);	
+					 
+					  var myOptions = 
+					  {
+					    zoom: 4,
+					    center: myLatlng,
+					    disableDefaultUI: true,
+					    zoomControl: true,
+					    mapTypeId: google.maps.MapTypeId.ROADMAP
+					  }
+					  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+					 
+				}
+				$(document).ready(function() {
+					  
+					  $("#clearMap").click(function() {
+					  	clearPolygons();
+					  	$("#mapForm\\:bpsJson").val(""); 
+					  });
+					 initializeMap();
+					 jsf.ajax.addOnEvent(function(evt) {
+					 	//console.log(evt);
+					 	///alert(evt.status + ' : ' + $("#mapForm\\:bpsJson").val());
+					 	if(evt.status == "success") {
+					 		var jsonStr = $("#mapForm\\:bpsJson").val();
+					 		if("" !== jsonStr) { 
+						 		var multip = JSON.parse( $("#mapForm\\:bpsJson").val());
+						 		if('undefined' !== typeof multip.type) {
+						 			if(multip.type == 'MultiPolygon') {
+						 				clearPolygons();
+						 				
+				                        console.log("setting loading....");
+						 				for ( var a = 0; a < multip.coordinates.length; a++) { 
+										  	for ( var b = 0; b < multip.coordinates[a].length; b++) { 
+											    var lls = [];
+										  		for ( var c = 0; c < multip.coordinates[a][b].length; c++) { 
+													var coo = multip.coordinates[a][b][c];
+													var ll = new google.maps.LatLng(coo[1], coo[0]);
+													lls.push(ll);	
+													map.setCenter(ll);				  			
+										  		}
+										  		var studyPolygon = new google.maps.Polygon({
+												    paths: lls,
+												    strokeColor: '#FF0000',
+												    strokeOpacity: 0.8,
+												    strokeWeight: 3,
+												    fillColor: '#FF0000',
+												    fillOpacity: 0.35
+												  });
+											  studyPolygon.setMap(map);							  
+											  polygons.push(studyPolygon);	
+										  	}
+										  }
+										  
+										    
+										  console.log("done loading....");
+						 			}
+						 		} 
+					 		}
+					 			
+					 	} 
+					 }); 
+				});
+				//]]>
+			</h:outputScript>
+            
+           	<h:panelGrid columns="1" style="padding-left:20px;" cellspacing="30">
+           		<h:form id="mapForm">
+           			<h:panelGroup> 
+           				Select a map
+	           			<h:selectOneRadio id="table" value="#{bpsBean.bpsTable}" immediate="true" layout="pageDirection" title="Select a Map">
+	           				<f:selectItem itemLabel="US" itemValue="bps_us" />
+	           				<f:selectItem itemLabel="AK" itemValue="bps_ak" />
+	           				<f:selectItem itemLabel="HI" itemValue="bps_hi" />
+	           				<f:ajax render="@form"></f:ajax>
+	           			</h:selectOneRadio>
+	           			Select a BPS
+	           			<h:selectOneRadio styleClass="bpsRadio" id="bps" value="#{bpsBean.bpsId}" immediate="true" layout="pageDirection" title="Select a BPS">
+	           				<f:selectItems itemLabel="#{bps.name}" itemValue="#{bps.id}"  value="#{bpsBean.bps}" var="bps" />
+	           				<f:ajax render="@form"></f:ajax>
+	           			</h:selectOneRadio>
+	           			
+	           			<h:inputHidden id="bpsJson" value="#{bpsBean.bpsJson}" ></h:inputHidden>
+           			</h:panelGroup>
+           			
+        		</h:form>
+        		<button id="clearMap">clear map</button>
+           		<div id="map_canvas" style="width:1060px; height:1000px"></div>
+           		
+           	</h:panelGrid>
+           
+           
+           
+         </ui:define>
+	</ui:composition>
+
+</body>
+</html>
