@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>FEIS Home</title>
+
+	</head>
+	<body>
+		<ui:composition template="/templates/masterLayout.xhtml">
+			<ui:define name="viewTitle">
+			<h1 style="display: none;">FEIS</h1>
+				 <h2>#{msgs.homePageTitle}</h2>
+			</ui:define>
+
+			<ui:define name="content">
+					<h:outputStylesheet library="css" name="buttons.css" target="body"  />
+					<h:outputScript target="body">
+						$(document).ready(function() {
+							// $('input,textarea').on('keydown',function(e) { // submit forms on pressing enter while focus is on any input elmnt inside form
+							// 	if (e.keyCode == 13) {
+							// 	    console.log("enter pressed")
+							// 		console.log("closest form")
+							// 		console.log($(this).closest('form'))
+							// 		$(this).closest('form').submit();
+							// 	}
+							// });
+
+							$("#srSearch\\:searchOne").val("");
+						});
+					</h:outputScript>
+					<h5>Find fire effects and fire regime information by species common or scientific name:</h5>
+					<h:panelGrid columns="1" style="padding-left:6px;" cellspacing="3">
+						<h:form id="srSearch" action="#{searchBean.searchByOtherHome}"
+								onkeypress="if (event.keyCode == 13){ event.preventDefault(); document.getElementById('srSearch:searchByOtherHome').click();}"
+								style="width:800px;">
+							<h:panelGroup style="color: black; font-size:medium;">
+								<h:inputText a:placeholder="Enter species"  id="searchOne" size="20" value="#{searchBean.inputName}" required="false" class="speciesSearch" /> &#160;
+								<h:commandLink id="searchByOtherHome" title="search for species reviews by species name" action="#{searchBean.searchByOtherHome}" styleClass="buttonsFEIS">Go</h:commandLink>
+							</h:panelGroup>
+						</h:form>
+						<h:panelGroup />
+						<h:form>
+							<p class="boldp">
+								Or search for <h:commandLink title="search for species reviews by advanced criteria" action="#{searchBean.reviewSearchAction}" >Species Reviews</h:commandLink>,
+								<h:commandLink title="search for fire regimes by advanced criteria" action="#{searchBean.fireRegimeSearchAction}">Fire Regimes</h:commandLink>, or
+								<h:commandLink title="search for fire studies by advanced criteria" action="#{searchBean.fireStudySearchAction}" >Fire Studies</h:commandLink> <br/>
+								by species name, location, plant community, or other criteria
+							</p>
+						</h:form>
+						<h:panelGroup />
+						<p>
+							<b>Species Reviews</b> include information about plant and animal species? biology, habitats, regeneration or reproductive processes, their relationships with fire, and management considerations.
+						</p>
+						<p></p>
+						<p>
+							<b>Fire Regime</b> publications include information about how often and how severely fires burned in specific ecosystems.
+						</p>
+						<p></p>
+						<p>
+							<b>Fire Studies</b> are summaries of one or more fire research publications.
+						</p>
+
+					</h:panelGrid>
+			 </ui:define>
+		</ui:composition>
+	</body>
+</html>

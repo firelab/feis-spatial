@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feis-postgis
+spec:
+  selector:
+    matchLabels:
+      app: feis
+      tier: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: feis
+        tier: db
+    spec:
+      containers:
+        - name: postgis
+          image: postgis/postgis:12-3.0-alpine
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: feis-secret-stash
+                  key: postgres_password
+            - name: POSTGRES_USER
+              value: postgres
+#              valueFrom:
+#                secretKeyRef:
+#                  name: feis-secret-stash
+#                  key: postgres_user
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data/
+              name: feis-postgis-pv
+      volumes:
+        - name: feis-postgis-pv
+          persistentVolumeClaim:
+            claimName: feis-postgis-pvc

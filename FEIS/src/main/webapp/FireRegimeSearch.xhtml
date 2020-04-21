@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<title>Advanced Search for Fire Regimes</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="viewTitle">
+			 <h2>#{msgs.fireRegimeSearchTitle}</h2>
+		</ui:define>
+		<ui:define name="content">
+			<h6>Fire Regime Reports and Fire Regime Syntheses include information about how often and how severely fires burned in specific ecosystems in the United States.?</h6>
+			<h:form id="formFireRegime" style="min-width:750px;" prependId="false">
+            <h:outputScript library="javax.faces" name="jsf.js" target="head"/>  
+            <script type="text/javascript">
+            
+if (!window["busystatus"]) {
+	var busystatus = {};
+}
+
+busystatus.onStatusChange = function onStatusChange(data) {
+	var status = data.status;
+	
+	if (status === "begin") {
+		document.body.style.cursor = 'wait';
+	} else {
+		document.body.style.cursor = 'auto';
+	}
+};
+
+jsf.ajax.addOnEvent(busystatus.onStatusChange);
+
+function cursor_wait() {
+	document.body.style.cursor = 'wait';
+	document.getElementById("btnSearch").style.cursor = 'wait';
+}
+function cursor_clear() {
+	document.body.style.cursor = 'auto';
+}
+</script> 
+                <script>
+                	$("li").hover(
+                			function () {
+                				$(this).append($("<span>***</span>"));
+                			},
+                			function () {
+                				$(this).find("span:last").remove();
+                			}
+                		);
+					 
+					//li with fade class
+					$("li.fade").hover(function(){$(this).fadeOut(100);$(this).fadeIn(500);});
+					 
+				</script>
+
+            	<br><h:message for="name" errorClass="errors" style="color: red;" /></br>           			
+            	
+            	<h:panelGrid style="padding-left:20px;" columns="2">
+            	</h:panelGrid>
+				
+				<h:panelGroup style="color: black; font-size:medium;">
+            		<b style="color: black; font-size:small;">&#160;&#160;&#160;&#160;&#160;&#160;Scientific or common name:</b>
+            			&#160;&#160;&#160;&#160;<h:inputText id="searchName" size="20" value="#{searchBean.fireRegimeName}" required="false" /> &#160; 
+                </h:panelGroup><br/><br/>
+            	
+            	<h:panelGroup style="color: black; font-size:medium;">
+            		<b title="You can search for fire regimes using words you believe the title contains." style="color: black; font-size:small;">&#160;&#160;&#160;&#160;&#160;&#160;Title:</b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+            			&#160;&#160;&#160;&#160;<h:inputText id="searchTitle" size="20" value="#{searchBean.fireRegimeTitle}" required="false" /> &#160; 
+            	</h:panelGroup><br/><br/>
+            	
+				<p class="geoSearchFilterHeader">
+					<h:selectBooleanCheckbox value="#{searchBean.byNewStates}" 
+				    	immediate="true" 
+				    	onclick="submit();" 
+						valueChangeListener="#{searchBean.geoAreaSelectChanged}">   
+					&#160;&#160;&#160;</h:selectBooleanCheckbox>State or province
+				</p> 
+				
+	           <h:panelGroup rendered="#{searchBean.byState}">
+	               Ctrl+click to select multiple political units<br />
+		           <h:selectManyListbox value="#{searchBean.states}" size="5" immediate="true">	
+		           <f:selectItems value="#{searchBean.stateItems}"></f:selectItems>     	            	 	
+		            			      				
+		           </h:selectManyListbox>
+	           </h:panelGroup>
+	           <br/>
+	           		  
+	            <ui:remove>--- Administrative Unit, Plant Community or Map Search ------</ui:remove>
+            	<p class="geoSearchFilterHeader">
+	            	  &#160;&#160;&#160;Agency or plant community:</p>
+	            	  <h:panelGrid rendered="true">	
+	            	  	<h:panelGroup>            	  
+		            	 	&#160;&#160;&#160;<h:selectOneMenu value="#{searchBean.otherArea}" 		            	 					 
+		            	 					  immediate="true" 
+		            						  onchange="submit();" 
+		            						  valueChangeListener="#{searchBean.otherAreaSelectChanged}">
+		            			<f:selectItem itemValue="0" itemLabel="Select a criterion" noSelectionOption="true"></f:selectItem>
+		            			<f:selectItem itemValue="2" itemLabel="Agency"></f:selectItem>
+		            			<f:selectItem itemValue="3" itemLabel="Plant community"></f:selectItem>		            				   		
+		            	 	</h:selectOneMenu>
+		            	 </h:panelGroup>
+
+	            	<h:panelGroup rendered="#{searchBean.byAdminUnit}">
+	            			Ctrl+click to select multiple administrative units<br />
+	            			<h:selectOneMenu value="#{searchBean.agency}" 		            	 					  
+		            	 					  immediate="true" 
+		            						  onchange="submit();" 
+		            						  valueChangeListener="#{searchBean.agencySelectChanged}">
+		            			<f:selectItems value="#{searchBean.agencyItems}"></f:selectItems>
+		            				            	   		
+		            	 	</h:selectOneMenu><font color="red"><strong>&nbsp;&nbsp;</strong></font>
+		            	 	
+		            	 	<h:selectOneMenu value="#{searchBean.region}" 
+		            	 					  rendered="#{searchBean.regionOn}"    
+		            	 					  immediate="true" 
+		            						  onchange="submit();"  
+		            						  valueChangeListener="#{searchBean.regionSelectChanged}">
+		            			<f:selectItems value="#{searchBean.regionItems}"></f:selectItems>            	   		
+		            	 	</h:selectOneMenu><font color="red"><strong><h:outputLabel value="" rendered="#{searchBean.regionOn}" /></strong></font>
+		            	 	
+		            	 	<h:selectManyListbox value="#{searchBean.unitNames}" 
+		            	 					  rendered="#{searchBean.agencyOn}" size="5">
+		            			<f:selectItems value="#{searchBean.nameItems}"></f:selectItems>            	   		
+		            	 	</h:selectManyListbox>
+		            	 	
+	            	</h:panelGroup>
+
+	            	<h:panelGroup rendered="#{searchBean.byPnvg}">
+	            			Ctrl+click to select multiple plant communities<br />
+	            			<h:selectOneMenu value="#{searchBean.pnvgRegion}" 		            	 					  
+		            	 					  immediate="true" 
+		            						  onchange="submit();" 
+		            						  valueChangeListener="#{searchBean.pnvgRegionSelectChanged}">
+		            			<f:selectItems value="#{searchBean.pnvgRegionItems}"></f:selectItems>            	   		
+		            	 	</h:selectOneMenu><font color="red"><strong>&nbsp;&nbsp;</strong></font>
+	            			<h:selectOneMenu value="#{searchBean.vegTypeDesc}"
+	            							 rendered="#{searchBean.pnvgRegionOn}" 		            	 					  
+		            	 					  immediate="true" 
+		            						  onchange="submit();" 
+		            						  valueChangeListener="#{searchBean.vegTypeSelectChanged}">
+		            			<f:selectItems value="#{searchBean.vegTypeItems}"></f:selectItems>
+		            				            	   		
+		            	 	</h:selectOneMenu><font color="red"><strong><h:outputLabel value="" rendered="#{searchBean.pnvgRegionOn}" /></strong></font>	            	 	
+		            	 	
+		            	 	<h:selectManyListbox value="#{searchBean.pnvgs}" 
+		            	 					  rendered="#{searchBean.plantCommunityOn}"  size="5">
+		            			<f:selectItems value="#{searchBean.pnvgItems}"></f:selectItems>            	   		
+		            	 	</h:selectManyListbox>
+		            	 	
+	            	</h:panelGroup>
+	            	
+	            <ui:remove>--- New Map Searches
+            	<p class="newMapSearches">
+	            	  &#160;<b style="color: black; font-size:small;">Map location:</b>
+				</p>
+				---</ui:remove>
+	            	  <h:panelGrid rendered="false">
+	            	  	<h:panelGroup>            	  
+		            	 	&#160;<h:selectOneMenu value="#{searchBean.newMapLayers}" 		            	 					 
+		            	 					  immediate="true" 
+		            						  onchange="submit();" 
+		            						  valueChangeListener="#{searchBean.otherAreaSelectChanged}">      			
+		            			<f:selectItem itemValue="0" itemLabel="Select a criterion" noSelectionOption="true"></f:selectItem>
+		            			<f:selectItem id="test" itemValue="4" itemLabel="Map location: Conterminous US"></f:selectItem>
+		            			<f:selectItem id="test2" itemValue="5" itemLabel="Map location: Alaska"></f:selectItem>
+		            			<f:selectItem id="test3" itemValue="6" itemLabel="Map location: Hawaii"></f:selectItem>		            				   		
+		            	 	</h:selectOneMenu>
+		            	 </h:panelGroup>
+		              </h:panelGrid>	
+	            	
+	            	<h:panelGroup rendered="#{searchBean.byMap}">
+	            				<!--  Map-based Point-Radius:<br /> -->
+	            				<h:selectOneRadio id="SelectMapSearchRadius" value="#{searchBean.geoRadius}" rendered="true">
+	            			<!--  <f:selectItem itemValue="1" itemLabel="Point Search (less than 1/10 mile)" ></f:selectItem><br/> -->
+	            			<!--  <f:selectItem itemValue="2" itemLabel="Radius Search (approximately 50 miles)"></f:selectItem><br/> -->
+	            			
+	            		</h:selectOneRadio>
+	            		<h:inputHidden id="mlatitude" value="#{searchBean.inputLatitude}" required="false" /> 
+	            		<h:inputHidden id="mlongitude" value="#{searchBean.inputLongitude}" required="false" /> <br/>              			
+            			
+	            		<b>Click on the map to place a search point. To improve results, select a state or province as well.</b>&nbsp;&nbsp;&nbsp;
+	            				<div>
+	            					<div id="map_canvas" style="width:760px; height:600px"></div>
+	            					<b>Note:</b> Right click on a <font color="red"><strong>red marker</strong></font> to remove it.
+	            					
+	            				<script type="text/javascript">
+								/**
+								 * Google Map API interaction
+								 */
+								var map;
+								var marker;
+								var markersArray = [];
+								function initialize() {
+									  //var myLatlng = new google.maps.LatLng(46.8722222,-113.9930556);
+									  //map centered for US display
+									  var myLatlng = new google.maps.LatLng(37.09024,-95.712891)									 
+									  var myOptions = {
+									    zoom: 4,
+									    center: myLatlng,
+									    disableDefaultUI: true,
+									    zoomControl: true,
+									    mapTypeId: google.maps.MapTypeId.ROADMAP
+									  }
+									  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+									
+									  google.maps.event.addListener(map, 'click', function(event) {
+									    placeMarker(event.latLng);
+									  });									  
+									 
+									 
+									}
+								function placeMarker(location) {
+										removeCoordinate();
+										marker = new google.maps.Marker({
+										  position: location, 
+										  title: location.toString(),
+										  clickable: true,
+										  map: map
+										});
+
+										markersArray.push(marker);
+										var longitude = location.lng();
+										longitude = longitude.toFixed(6);
+										  
+										var latitude = location.lat();
+										latitude = latitude.toFixed(6);
+										
+										  //var coordinates = marker.getPoint();
+										document.getElementById('mlatitude').value = latitude;
+										document.getElementById('mlongitude').value = longitude;
+										google.maps.event.addListener(marker,"click",function(event){
+											showCoordinate(location);
+										});
+										 google.maps.event.addListener(marker, 'rightclick', function (event) {
+									         removeCoordinate();
+									    });
+										
+										
+								}
+								function showCoordinate(location) {	
+									   alert("long:" + longitude + "lat:" + latitude);
+								}
+
+								function removeCoordinate() {
+									
+								       if (markersArray) {
+								    	   for (i in markersArray) {
+								    		   markersArray[i].setMap(null);
+								    	   }
+								       }
+								}								
+								</script>
+
+	            				<script>window.onload = initialize();</script>
+	            				
+
+							</div>
+							
+	            			</h:panelGroup>
+	            			
+	            	<h:panelGroup rendered="#{searchBean.byMapAlaska}">
+	            				<!--  Map-based Point-Radius:<br /> -->
+	            		<h:selectOneRadio id="SelectMapSearchRadiusAlaska" value="#{searchBean.geoRadius}" rendered="true">
+	            		</h:selectOneRadio>
+	            		<h:inputHidden id="mlatitudeAlaska" value="#{searchBean.inputLatitude}" required="false" /> 
+	            		<h:inputHidden id="mlongitudeAlaska" value="#{searchBean.inputLongitude}" required="false" /> 
+	            		<br/>              			
+            			
+	            		<b>Click on the map to place a search point. To improve results, select a state or province as well.</b>&nbsp;&nbsp;&nbsp;
+	            				<div>
+	            					<div id="map_canvas" style="width:760px; height:600px"></div>
+	            					<b>Note:</b> Right click on a <font color="red"><strong>red marker</strong></font> to remove it.
+	            					
+								<script type="text/javascript">
+								/**
+								 * Google Map API interaction
+								 */
+								var map;
+								var marker;
+								var markersArray = [];
+								function initialize() {
+									  //var myLatlng = new google.maps.LatLng(46.8722222,-113.9930556);
+									  //map centered for US display
+									  var myLatlng = new google.maps.LatLng(64.0000,-150.0000)
+									  var myOptions = {
+									    zoom: 4,
+									    center: myLatlng,
+									    disableDefaultUI: true,
+									    zoomControl: true,
+									    mapTypeId: google.maps.MapTypeId.ROADMAP
+									  }
+									  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+									
+									  google.maps.event.addListener(map, 'click', function(event) {
+									    placeMarker(event.latLng);
+									  });									  
+									 
+									 
+									}
+								function placeMarker(location) {
+										removeCoordinate();
+										marker = new google.maps.Marker({
+										  position: location, 
+										  title: location.toString(),
+										  clickable: true,
+										  map: map
+										});
+
+										markersArray.push(marker);
+										var longitude = location.lng();
+										longitude = longitude.toFixed(6);
+										  
+										var latitude = location.lat();
+										latitude = latitude.toFixed(6);
+										
+										  //var coordinates = marker.getPoint();
+										document.getElementById('mlatitudeAlaska').value = latitude;
+										document.getElementById('mlongitudeAlaska').value = longitude;
+										google.maps.event.addListener(marker,"click",function(event){
+											showCoordinate(location);
+										});
+										 google.maps.event.addListener(marker, 'rightclick', function (event) {
+									         removeCoordinate();
+									    });
+										
+										
+								}
+								function showCoordinate(location) {	
+									   alert("long:" + longitude + "lat:" + latitude);
+								}
+
+								function removeCoordinate() {
+									
+								       if (markersArray) {
+								    	   for (i in markersArray) {
+								    		   markersArray[i].setMap(null);
+								    	   }
+								       }
+								}//this was missing, map works now.
+	            
+	           
+	                  
+								</script>
+
+	            				<script>window.onload = initialize();</script>
+	            				
+
+							</div>
+							
+	            			</h:panelGroup>
+                     
+	            	<h:panelGroup rendered="#{searchBean.byMapHawaii}">
+	            				<!--  Map-based Point-Radius:<br /> -->
+	            				<h:selectOneRadio id="SelectMapSearchRadiusHawaii" value="#{searchBean.geoRadius}" rendered="true">
+	            			<!--  <f:selectItem itemValue="1" itemLabel="Point Search (less than 1/10 mile)" ></f:selectItem><br/> -->
+	            			<!--  <f:selectItem itemValue="2" itemLabel="Radius Search (approximately 50 miles)"></f:selectItem><br/> -->
+	            			
+	            		</h:selectOneRadio>
+	            		<h:inputHidden id="mlatitudeHawaii" value="#{searchBean.inputLatitude}" required="false" /> 
+	            		<h:inputHidden id="mlongitudeHawaii" value="#{searchBean.inputLongitude}" required="false" /> 
+	            	 
+	            		<br/>              			
+            			
+	            		<b>Click on the map to place a search point. To improve results, select a state or province as well.</b>&nbsp;&nbsp;&nbsp;
+	            				<div>
+	            					<div id="map_canvas" style="width:760px; height:600px"></div>
+	            					<b>Note:</b> Right click on a <font color="red"><strong>red marker</strong></font> to remove it.
+	            					
+	            				<script type="text/javascript">
+								/**
+								 * Google Map API interaction
+								 */
+								var map;
+								var marker;
+								var markersArray = [];
+								function initialize() {
+									  //var myLatlng = new google.maps.LatLng(46.8722222,-113.9930556);
+									  //map centered for US display
+									  var myLatlng = new google.maps.LatLng(21.3114,-157.7964)									 
+									  var myOptions = {
+									    zoom: 7,
+									    center: myLatlng,
+									    disableDefaultUI: true,
+									    zoomControl: true,
+									    mapTypeId: google.maps.MapTypeId.ROADMAP
+									  }
+									  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+									
+									  google.maps.event.addListener(map, 'click', function(event) {
+									    placeMarker(event.latLng);
+									  });									  
+									 
+									 
+									}
+								function placeMarker(location) {
+										removeCoordinate();
+										marker = new google.maps.Marker({
+										  position: location, 
+										  title: location.toString(),
+										  clickable: true,
+										  map: map
+										});
+
+										markersArray.push(marker);
+										var longitude = location.lng();
+										longitude = longitude.toFixed(6);
+										  
+										var latitude = location.lat();
+										latitude = latitude.toFixed(6);
+										
+										  //var coordinates = marker.getPoint();
+										document.getElementById('mlatitudeHawaii').value = latitude;
+										document.getElementById('mlongitudeHawaii').value = longitude;
+										google.maps.event.addListener(marker,"click",function(event){
+											showCoordinate(location);
+										});
+										 google.maps.event.addListener(marker, 'rightclick', function (event) {
+									         removeCoordinate();
+									    });
+										
+									
+								}
+								function showCoordinate(location) {	
+									   alert("long:" + longitude + "lat:" + latitude);
+								}
+
+								function removeCoordinate() {
+									
+								       if (markersArray) {
+								    	   for (i in markersArray) {
+								    		   markersArray[i].setMap(null);
+								    	   }
+								       }
+								}//this was missing, map works now.
+	            
+	           
+	                  
+								</script>
+
+	            				<script>window.onload = initialize();</script>
+	            				
+
+							</div>
+							
+	            			</h:panelGroup>	 
+    
+	           		  </h:panelGrid> 
+            	<h:panelGrid rendered="#{not empty searchBean.reportErrorMsg}" columns="1" >
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;">            			
+            			<font color="red"><strong><h:outputLabel value="#{searchBean.reportErrorMsg}" rendered="#{not searchBean.hasResult}" /></strong></font><br/>
+            			
+            		</h:panelGroup>
+            		
+            	</h:panelGrid>
+            	
+            	<br/>
+            	<br/>
+            	<h:panelGroup style="color: black; font-size:small;" >  
+            	<!-- Buttons CSS -->
+            	<h:outputStylesheet library="css" name="buttons.css"  />      		
+            		<h:commandButton id="btnSearch" value="Go" action="#{searchBean.searchByFireRegime}" style="font-weight:bold; font-size:small;"  onclick="javascript:cursor_wait()" styleClass="buttonsFEIS"/>&#160;&#160;
+            		<h:commandButton id="btnClear" value="Clear" action="#{searchBean.clearSearch}"  type="submit" immediate="true" style="font-weight:bold; font-size:small;" styleClass="buttonsFEIS" />&#160;&#160;
+					<h:commandLink title="display all fire regimes" action="#{searchBean.searchFireRegimeAll}" styleClass="buttonsFEIS">Browse All</h:commandLink>
+				</h:panelGroup>
+            	
+            </h:form>
+         </ui:define>
+	</ui:composition>
+</body>
+</html>

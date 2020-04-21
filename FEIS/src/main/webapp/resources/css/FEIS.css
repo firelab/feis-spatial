@@ -1,0 +1,49 @@
+.report{border:0; font-family: Verdana; font-size: medium; color: #000;padding-left:30px;}
+.lifeform{border:0; font-family: Verdana; font-size: medium; color: #000;padding-left:30px;}
+
+.acronym{}
+.scientificName{ font-style: italic;}
+
+.searchTitle { 
+	style="color: black; 
+	font-size:medium; 
+	padding-bottom:8em; 
+	font-weight: bolder;
+	font-size: medium;
+}
+
+.isloading-overlay {
+  position: relative;
+  text-align: center;
+}
+.isloading-overlay .isloading-wrapper {
+  background: #FFFFFF;
+  -webkit-border-radius: 7px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 7px;
+  -moz-background-clip: padding;
+  border-radius: 7px;
+  background-clip: padding-box;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  top: 10%;
+  z-index: 9000;
+}
+
+.odd {
+    background-color: lightgrey;
+}
+
+.even {
+    background-color: white;
+}
+
+.boldp {
+    font-weight: bolder;
+}
+
+.speciesSearch {
+    line-height: 26px;
+    width: 28em;
+}
