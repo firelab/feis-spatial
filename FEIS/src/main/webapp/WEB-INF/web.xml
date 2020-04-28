@@ -10,7 +10,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <context-param>
     <param-name>html-path</param-name>
     <!--     	<param-value>\work\mye10\newworkspace\FEIS\WebContentParts\</param-value> -->
-    <param-value>/work/projects/workspaces/idea/feis-spatial/FEIS/src/main/webapp/WebContentParts/</param-value>
+    <param-value>${html-path}</param-value>
   <!--<param-value>/var/local/feis-spatial/frontpage/</param-value> -->
 </context-param>
 <servlet>

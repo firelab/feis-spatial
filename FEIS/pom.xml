@@ -84,9 +84,41 @@
 
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>fs</id>
+      <activation>
+        <property>
+          <name>target.env</name>
+          <value>fs</value>
+        </property>
+      </activation>
+      <properties>
+        <resource.dir>src/fs</resource.dir>
+        <html-path>/work/projects/workspaces/idea/feis-spatial/FEIS/src/main/webapp/WebContentParts/</html-path>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>mtdc</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>target.env</name>
+          <value>mtdc</value>
+        </property>
+      </activation>
+      <properties>
+        <resource.dir>src/mtdc</resource.dir>
+        <html-path>/var/local/feis-spatial/frontpage/</html-path>
+      </properties>
+    </profile>
+  </profiles>
+
   <build>
     <finalName>feis</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -96,6 +128,7 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
+
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -108,6 +141,21 @@
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
+          <configuration>
+            <webResources>
+              <resource>
+                <!-- this is relative to the pom.xml directory and changes by the profile-->
+                <directory>${resource.dir}</directory>
+               </resource>
+               <resource>
+                <filtering>true</filtering>
+                <directory>src/main/webapp</directory>
+                <includes>
+                  <include>**/*.xml</include>
+                </includes>
+               </resource>
+            </webResources>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
