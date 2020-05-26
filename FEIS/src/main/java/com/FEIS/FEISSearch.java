@@ -962,6 +962,7 @@ public class FEISSearch implements Serializable {
 			setInputFsName("");
 			setInputAuthor("");
 			setInputTitle("");
+			setFsResultsTitleOne("Search Results");
 		} else {
 			this.hasResult = false;
 			this.numSPPReturned = "0";
@@ -2606,8 +2607,7 @@ public class FEISSearch implements Serializable {
 
 	public String searchByFireStudy() {
 		// Dynamically changing the title of the results page
-		setFsResultsTitleOne("");
-		setFsResultsTitleTwo("I'm not empty!");
+		setFsResultsTitleOne("set");
 		// end
 
 		// keeps these guys from showing up where they aren't supposed to

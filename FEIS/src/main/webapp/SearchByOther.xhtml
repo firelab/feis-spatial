@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-<title>Insert title here</title>
+<title>#{msgs.byOtherPageTitle}</title>
 
 </head>
 <body>
@@ -17,7 +17,7 @@
 			 <h2>#{msgs.byOtherPageTitle}</h2>
 		</ui:define>
 		<ui:define name="content">
-			<h6>Species Reviews include information about species? biology, habitats, regeneration or reproductive processes, their relationships with fire, and management considerations.</h6>
+			<h6>Species Reviews include information about species' biology, habitats, regeneration or reproductive processes, relationships with fire, and management considerations.</h6>
 			<h:form id="frmSearchByOther" style="min-width:750px;" prependId="false">             	
             <h:outputScript library="javax.faces" name="jsf.js" target="head"/>  
             <script type="text/javascript">
@@ -557,12 +557,12 @@ function cursor_clear() {
 	            	
 	            	            	
             	<br/>
-            	<h:panelGroup style="color: black; font-size:small;" >  
+            	<h:panelGroup style="color: black;" >
             	<!-- Buttons CSS -->
             	<h:outputStylesheet library="css" name="buttons.css"  />      		
             		<h:commandButton id="btnSearch" value="Go" action="#{searchBean.searchByOther}" style="font-weight:bold; font-size:small;"  onclick="javascript:cursor_wait()" class="buttonsFEIS"/>&#160;&#160;
             		<h:commandButton id="btnClear" value="Clear" action="#{searchBean.clearSearch}"  type="submit" immediate="true" style="font-weight:bold; font-size:small;" class="buttonsFEIS" />&#160;&#160;
-					<h:commandLink title="display all species reviews" action="#{searchBean.findAll}" styleClass="buttonsFEIS">Browse All</h:commandLink>
+					<h:commandLink title="display all species reviews" action="#{searchBean.findAll}" style="font-weight:bold; font-size:small;" styleClass="buttonsFEIS">Browse All</h:commandLink>
             	</h:panelGroup> 
             	
             </h:form>

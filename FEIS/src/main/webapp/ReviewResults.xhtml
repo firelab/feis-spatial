@@ -40,7 +40,18 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             			<hr style="color: black; margin-left: 10px; height: 1px; vertical-align: top; width: 661px "/>
             		</h:panelGroup>
             		<h:panelGroup>
-            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;"><b>No species reviews meet your search criteria</b></h:panelGroup>
+            		<h:panelGroup style="color: black; font-size:small; padding-left:20px;">
+						<h:panelGrid columns="1" cellpadding="5">
+							<b style="padding-left:10px;">No Species Reviews meet your search criteria</b>
+							<h:panelGroup>
+								<b style="padding-left:10px;">
+									Search for this species in a <h:commandLink title="search for fire studies by advanced criteria" action="#{searchBean.fireStudySearchAction}" >Fire Study</h:commandLink> or <h:commandLink title="search for fire regimes by advanced criteria" action="#{searchBean.fireRegimeSearchAction}">Fire Regime</h:commandLink> publication.
+								</b>
+							</h:panelGroup>
+						</h:panelGrid>
+
+
+					</h:panelGroup>
             		
             		</h:panelGroup>
   
@@ -86,7 +97,7 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             				 value="#{searchBean.speciesList}" 
             				 var="SPP" 
             				 captionStyle="font-size: 0.95em; font-style:italic" 
-            				 columnClasses="acronym,scientificName"
+            				 columnClasses="scientificName,acronym"
 							 rowClasses="odd,even">
 					<h:column  headerClass="columnHeader" footerClass="columnFooter"><f:facet name="header">Scientific Name</f:facet>
 						#{SPP.scientificName}

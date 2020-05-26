@@ -17,7 +17,7 @@
 			 <h2>#{msgs.fireStudyResultsTitle}</h2>
 		</ui:define>
 		<ui:define name="content">
-			<h6>Fire Studies are summaries of one or more fire research publications</h6>
+			<h6>Fire Studies are summaries of one or more fire research publications.</h6>
 			<h:form id="formFireStudy" style="min-width:750px;" prependId="false">             	
             <h:outputScript library="javax.faces" name="jsf.js" target="head"/>  
             <script type="text/javascript">
@@ -71,30 +71,16 @@ function cursor_clear() {
                 	-->
                 	
                 </h:panelGrid>
-				 
-            	<h:panelGroup style="color: black; font-size:medium;">
-            		<b style="color: black; font-size:small;">&#160;&#160;&#160;&#160;&#160;&#160;Scientific or common name:</b>
-            			&#160;&#160;&#160;&#160;<h:inputText id="searchName" size="20" value="#{searchBean.inputFsName}" required="false" /> &#160; 
-                </h:panelGroup><br/><br/>
-            	
-            	<!-- Should be sorting by TITLE of paper -->
-            	<h:panelGroup style="color: black; font-size:medium;" >
-            		<b style="color: black; font-size:small;" title="You can search for fire-study reports using words you believe the title contains.">&#160;&#160;&#160;&#160;&#160;&#160;Title:</b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-            			&#160;&#160;&#160;&#160;<h:inputText id="searchTitle" size="20" value="#{searchBean.inputTitle}" required="false" /> &#160; 
-            	</h:panelGroup><br/><br/>
-            	
-            	<!-- Should be sorting by AUTHOR of the paper -->
-            	<h:panelGroup style="color: black; font-size:medium;">
-            		<b style="color: black; font-size:small;" title="You can search for fire-study reports using a first name, last name or both.">&#160;&#160;&#160;&#160;&#160;&#160;Author:</b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-            			&#160;&#160;&#160;&#160;<h:inputText id="searchAuthor" size="20" value="#{searchBean.inputAuthor}" required="false" /> &#160; 
-            	</h:panelGroup><br/><br/>
-            
-            	
-            	<!-- 
-            	<p style="color: black; font-size:medium; font-weight: bold;">OR&nbsp;&nbsp;&nbsp;</p>
-            	-->
-	            
-				<!-- Test 09-26-2013 -->
+				<h:panelGrid cellpadding="5" style="padding-left:20px; width: 50%;" columns="2" columnClasses="leftColumn,rightColumn">
+					<b style="color: black; font-size:small;">Scientific or common name:</b>
+					<h:inputText id="searchName" size="20" value="#{searchBean.inputFsName}" required="false" />
+					<b style="color: black; font-size:small;" title="You can search for fire-study reports using words you believe the title contains.">Title:</b>
+					<h:inputText id="searchTitle" size="20" value="#{searchBean.inputTitle}" required="false" />
+					<b style="color: black; font-size:small;" title="You can search for fire-study reports using a first name, last name or both.">Author:</b>
+					<h:inputText id="searchAuthor" size="20" value="#{searchBean.inputAuthor}" required="false" /> &#160;
+				</h:panelGrid>
+
+
 				<p class="geoSearchFilterHeader">
 					<h:selectBooleanCheckbox value="#{searchBean.byNewStates}" 
 				    	immediate="true" 
@@ -498,7 +484,7 @@ function cursor_clear() {
             	<h:outputStylesheet library="css" name="buttons.css"  />      		
             		<h:commandButton id="btnSearch" value="Go" action="#{searchBean.searchByFireStudy}" style="font-weight:bold; font-size:small;"  onclick="javascript:cursor_wait()" class="buttonsFEIS"/>&#160;&#160;
             		<h:commandButton id="btnClear" value="Clear" action="#{searchBean.clearSearch}"  type="submit" immediate="true" style="font-weight:bold; font-size:small;" class="buttonsFEIS" />&#160;&#160;
-					<h:commandLink title="display all fire studies" action="#{searchBean.searchByFSAll}" styleClass="buttonsFEIS">Browse All</h:commandLink>
+					<h:commandLink title="display all fire studies" action="#{searchBean.searchByFSAll}" style="font-weight:bold; font-size:small;"  styleClass="buttonsFEIS">Browse All</h:commandLink>
 				</h:panelGroup>
             	
             </h:form>

@@ -22,14 +22,6 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 					<h:outputStylesheet library="css" name="buttons.css" target="body"  />
 					<h:outputScript target="body">
 						$(document).ready(function() {
-							// $('input,textarea').on('keydown',function(e) { // submit forms on pressing enter while focus is on any input elmnt inside form
-							// 	if (e.keyCode == 13) {
-							// 	    console.log("enter pressed")
-							// 		console.log("closest form")
-							// 		console.log($(this).closest('form'))
-							// 		$(this).closest('form').submit();
-							// 	}
-							// });
 
 							$("#srSearch\\:searchOne").val("");
 						});
@@ -46,23 +38,23 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 						</h:form>
 						<h:panelGroup />
 						<h:form>
-							<p class="boldp">
-								Or search for <h:commandLink title="search for species reviews by advanced criteria" action="#{searchBean.reviewSearchAction}" >Species Reviews</h:commandLink>,
+							<p class="thirteenpt" >
+								Or use the advanced search to find <h:commandLink title="search for species reviews by advanced criteria" action="#{searchBean.reviewSearchAction}" >Species Reviews</h:commandLink>,
 								<h:commandLink title="search for fire regimes by advanced criteria" action="#{searchBean.fireRegimeSearchAction}">Fire Regimes</h:commandLink>, or
-								<h:commandLink title="search for fire studies by advanced criteria" action="#{searchBean.fireStudySearchAction}" >Fire Studies</h:commandLink> <br/>
-								by species name, location, plant community, or other criteria
+								<h:commandLink title="search for fire studies by advanced criteria" action="#{searchBean.fireStudySearchAction}" >Fire Studies</h:commandLink>
+								by species' name, location, plant community, and/or other criteria
 							</p>
 						</h:form>
 						<h:panelGroup />
-						<p>
-							<b>Species Reviews</b> include information about plant and animal species? biology, habitats, regeneration or reproductive processes, their relationships with fire, and management considerations.
+						<p class="thirteenpt">
+							<b>Species Reviews</b> include information about plant and animal species' biology, habitats, regeneration or reproductive processes, relationships with fire, and management considerations.
 						</p>
 						<p></p>
-						<p>
+						<p class="thirteenpt">
 							<b>Fire Regime</b> publications include information about how often and how severely fires burned in specific ecosystems.
 						</p>
 						<p></p>
-						<p>
+						<p class="thirteenpt">
 							<b>Fire Studies</b> are summaries of one or more fire research publications.
 						</p>
 

@@ -17,7 +17,7 @@
 			 <h2>#{msgs.fireRegimeSearchTitle}</h2>
 		</ui:define>
 		<ui:define name="content">
-			<h6>Fire Regime Reports and Fire Regime Syntheses include information about how often and how severely fires burned in specific ecosystems in the United States.?</h6>
+			<h6>Fire Regime Reports and Fire Regime Syntheses include information about how often and how severely fires burned in specific ecosystems in the United States.</h6>
 			<h:form id="formFireRegime" style="min-width:750px;" prependId="false">
             <h:outputScript library="javax.faces" name="jsf.js" target="head"/>  
             <script type="text/javascript">
@@ -63,27 +63,22 @@ function cursor_clear() {
 
             	<br><h:message for="name" errorClass="errors" style="color: red;" /></br>           			
             	
-            	<h:panelGrid style="padding-left:20px;" columns="2">
-            	</h:panelGrid>
-				
-				<h:panelGroup style="color: black; font-size:medium;">
-            		<b style="color: black; font-size:small;">&#160;&#160;&#160;&#160;&#160;&#160;Scientific or common name:</b>
-            			&#160;&#160;&#160;&#160;<h:inputText id="searchName" size="20" value="#{searchBean.fireRegimeName}" required="false" /> &#160; 
-                </h:panelGroup><br/><br/>
-            	
-            	<h:panelGroup style="color: black; font-size:medium;">
-            		<b title="You can search for fire regimes using words you believe the title contains." style="color: black; font-size:small;">&#160;&#160;&#160;&#160;&#160;&#160;Title:</b>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-            			&#160;&#160;&#160;&#160;<h:inputText id="searchTitle" size="20" value="#{searchBean.fireRegimeTitle}" required="false" /> &#160; 
-            	</h:panelGroup><br/><br/>
-            	
+            	<h:panelGrid style="padding-left:20px; width: 50%;" columns="2" cellpadding="5" columnClasses="leftColumn,rightColumn">
+					<b style="color: black; font-size:small;">Scientific or common name:</b>
+					<h:inputText id="searchName" size="20" value="#{searchBean.fireRegimeName}" required="false" />
+					<b title="You can search for fire regimes using words you believe the title contains." style="color: black; font-size:small;">Title:</b>
+					<h:inputText id="searchTitle" size="20" value="#{searchBean.fireRegimeTitle}" required="false" /> &#160;
+				</h:panelGrid>
+
+
 				<p class="geoSearchFilterHeader">
-					<h:selectBooleanCheckbox value="#{searchBean.byNewStates}" 
-				    	immediate="true" 
-				    	onclick="submit();" 
-						valueChangeListener="#{searchBean.geoAreaSelectChanged}">   
+					<h:selectBooleanCheckbox value="#{searchBean.byNewStates}"
+				    	immediate="true"
+				    	onclick="submit();"
+						valueChangeListener="#{searchBean.geoAreaSelectChanged}">
 					&#160;&#160;&#160;</h:selectBooleanCheckbox>State or province
-				</p> 
-				
+				</p>
+
 	           <h:panelGroup rendered="#{searchBean.byState}">
 	               Ctrl+click to select multiple political units<br />
 		           <h:selectManyListbox value="#{searchBean.states}" size="5" immediate="true">	
@@ -468,7 +463,7 @@ function cursor_clear() {
             	<h:outputStylesheet library="css" name="buttons.css"  />      		
             		<h:commandButton id="btnSearch" value="Go" action="#{searchBean.searchByFireRegime}" style="font-weight:bold; font-size:small;"  onclick="javascript:cursor_wait()" styleClass="buttonsFEIS"/>&#160;&#160;
             		<h:commandButton id="btnClear" value="Clear" action="#{searchBean.clearSearch}"  type="submit" immediate="true" style="font-weight:bold; font-size:small;" styleClass="buttonsFEIS" />&#160;&#160;
-					<h:commandLink title="display all fire regimes" action="#{searchBean.searchFireRegimeAll}" styleClass="buttonsFEIS">Browse All</h:commandLink>
+					<h:commandLink title="display all fire regimes" action="#{searchBean.searchFireRegimeAll}" style="font-weight:bold; font-size:small;" styleClass="buttonsFEIS">Browse All</h:commandLink>
 				</h:panelGroup>
             	
             </h:form>

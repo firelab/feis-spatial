@@ -27,6 +27,9 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 		<h:commandButton  action="#{searchBean.gotoFireRegimeSearchAction}" value="New Search"/>
             			<h:commandButton  action="#{searchBean.gotoReviseFireRegimeSearch}" value="Revise"/> 
                		 </h:panelGroup>
+					<h:panelGroup>
+						<p style="padding-left: 10px;">Minimum and maximum mean fire-return intervals (MFRI) are from LANDFIRE Biophysical settings and/or literature.</p>
+					</h:panelGroup>
                		 <h:panelGrid style="padding-left:0px; width:80%;"> 
             			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not searchBean.adminJunk}"><b></b>&nbsp;&nbsp;#{searchBean.adminJunk}<br/></h:panelGroup> 
             			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not searchBean.plantJunk}"> <b></b>&nbsp;&nbsp;#{searchBean.plantJunk}<br/></h:panelGroup>    
