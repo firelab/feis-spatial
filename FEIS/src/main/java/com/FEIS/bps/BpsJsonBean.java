@@ -86,7 +86,7 @@ public class BpsJsonBean implements Serializable {
 
 
 	private void updateBpsJson() {
-		String query = "select ST_AsGeoJSON(\"the_geom\") from " + bpsTable  +
+		String query = "select ST_AsGeoJSON(\"the_geom\"::geometry, 9, 8) from " + bpsTable  +
 				" where \"id\" = ?";
 
 		DbAccess dba = new DbAccess(query);
