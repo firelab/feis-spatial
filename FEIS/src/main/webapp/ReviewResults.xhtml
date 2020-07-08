@@ -41,10 +41,10 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             		</h:panelGroup>
             		<h:panelGroup>
             		<h:panelGroup style="color: black; font-size:small; padding-left:20px;">
-						<h:panelGrid columns="1" cellpadding="5">
-							<b style="padding-left:10px;">No Species Reviews meet your search criteria</b>
-							<h:panelGroup>
-								<b style="padding-left:10px;">
+						<h:panelGrid columns="1" cellpadding="5" style=" color: black; font-size:small; ">
+							<b style="padding-left:10px; font-size:small; ">No Species Reviews meet your search criteria</b>
+							<h:panelGroup style="padding-left:10px; color: black; font-size:small; ">
+								<b >
 									Search for this species in a <h:commandLink title="search for fire studies by advanced criteria" action="#{searchBean.fireStudySearchAction}" >Fire Study</h:commandLink> or <h:commandLink title="search for fire regimes by advanced criteria" action="#{searchBean.fireRegimeSearchAction}">Fire Regime</h:commandLink> publication.
 								</b>
 							</h:panelGroup>
@@ -67,7 +67,6 @@ Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             		<h:commandButton  action="#{searchBean.gotoRevise}" value="Revise"/>      
             		
             		<br/>
-            		<!-- changes 09 28 2013 -->
             		<h:panelGrid style="padding-left:0px; width:80%;"> 
             			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not empty searchBean.adminJunk}"><b></b>&nbsp;&nbsp;#{searchBean.adminJunk}<br/></h:panelGroup> 
             			<h:panelGroup style="color: black; font-size:extra-small; padding-left:10px;" rendered="#{not empty searchBean.plantJunk}"> <b></b>&nbsp;&nbsp;#{searchBean.plantJunk}<br/></h:panelGroup>    

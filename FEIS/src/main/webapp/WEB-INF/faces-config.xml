@@ -50,6 +50,13 @@
 	<navigation-rule>
 		<from-view-id>/ReviewResults.xhtml</from-view-id>
 		<navigation-case>
+			<from-outcome>searchByFireStudy</from-outcome>
+			<to-view-id>/FireStudySearch.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ReviewResults.xhtml</from-view-id>
+		<navigation-case>
 			<from-outcome>searchByName</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
